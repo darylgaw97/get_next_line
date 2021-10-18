@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
 
 static int gnl_find_end(const char *str, size_t n);
 static char *gnl_make_line(char *cache);
@@ -22,6 +21,29 @@ char *get_next_line(int fd)
     char *buffer;
     char *line;
 
+    buffer = malloc(BUFFER_SIZE + 1);
+    if(!cache)
+    {
+        cache = malloc(BUFFER_SIZE + 1);
+        if (read(fd, cache, BUFFER_SIZE) == 0)
+            return (NULL);
+    }
+    while (!(gnl_find_end(cache, BUFFER_SIZE)))
+    {
+        if (read(fd, buffer, BUFFER_SIZE) != 0)
+            cache = ft_strjoin(cache, buffer);
+        else
+        {
+            if (cache[0] == '\0')
+                return (NULL);
+            char *last = ft_strdup(cache);
+            free (cache);
+            return (last);
+        }
+    }
+    line = gnl_make_line(cache);
+    cache += ft_strlen(line);
+    return (line);
 }
 
 static int gnl_find_end(const char *str, size_t n)
