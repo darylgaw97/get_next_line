@@ -10,4 +10,22 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
+#include <fcntl.h>
+#include "get_next_line.h"
 
+int main(void)
+{
+    int fd;
+    char *line;
+
+    fd = open("marvel.txt", O_RDONLY);
+
+    line = get_next_line(fd);
+    while (line)
+    {
+        printf("%s", line);
+        free (line);
+        line = get_next_line(fd);
+    }
+}
