@@ -32,8 +32,18 @@ char *get_next_line(int fd)
         buffer = gnl_load_buffer(fd);
         if (!buffer)
         {
-            free (cache);
-            return (NULL);
+            if (*cache)
+            {
+                line = ft_strdup(cache);
+                free(cache);
+                cache = NULL;
+                return (line);
+            }
+            else
+            {
+                free (cache);
+                return (NULL);
+            }
         }
         temp = cache;
         cache = ft_strjoin(cache, buffer);
