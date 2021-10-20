@@ -32,11 +32,8 @@ char *get_next_line(int fd)
         buffer = gnl_load_buffer(fd);
         if (!buffer)
         {
-            line = ft_strdup(cache);
-            if (*line == '\0')
-                return (NULL);
-            free(cache);
-            return (line);
+            free (cache);
+            return (NULL);
         }
         temp = cache;
         cache = ft_strjoin(cache, buffer);
