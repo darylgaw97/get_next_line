@@ -12,88 +12,74 @@
 
 #include "get_next_line.h"
 
-static int gnl_find_end(const char *cache);
-static char *gnl_load_buffer(int fd);
-static char *gnl_make_line(const char *cache);
+static int  gnl_find_end(const char *cache);
+static int  gnl_load_cache(char **cache, int fd);
+static char *gnl_make_line(char *cache);
+static void gnl_update_cache(char **caache, char *line);
 
 char *get_next_line(int fd)
 {
     static char *cache;
-    char *buffer;
-    char *temp;
     char *line;
 
-    if (!cache)
+    if (cache == NULL)
         cache = ft_strdup("");
-    while (!*cache || !gnl_find_end(cache))
+    while (!gnl_find_end(cache))
     {
-        temp = NULL;
-        buffer = NULL;
-        buffer = gnl_load_buffer(fd);
-        if (!buffer)
+        if (gnl_load_cache(&cache, fd) == 0)
         {
             if (*cache)
             {
-                line = ft_strdup(cache);
+                line = strdup(cache);
                 free(cache);
-                cache = NULL;
                 return (line);
             }
             else
             {
-                free (cache);
+                free(cache);
                 return (NULL);
             }
         }
-        temp = cache;
-        cache = ft_strjoin(cache, buffer);
-        free(temp);
-        free(buffer);
     }
     line = gnl_make_line(cache);
-    temp = cache;
-    cache = ft_substr(cache, ft_strlen(line), ft_strlen(cache) - ft_strlen(line));
-    free(temp);
+    gnl_update_cache(&cache, line);
     return (line);
 }
 
 static int gnl_find_end(const char *cache)
 {
-    size_t i;
-
-    i = 0;
-    while (cache[i])
+    while (*cache)
     {
-        if (cache[i] == '\n')
+        if (*cache++ == '\n')
             return (1);
-        i++;
     }
     return (0);
 }
 
-static char *gnl_load_buffer(int fd)
+static int gnl_load_cache(char **cache, int fd)
 {
     char *buffer;
+    char *temp;
     int i;
 
     buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
-    if (!buffer)
-        return (NULL);
+    if (buffer == NULL)
+        return (0);
     i = read(fd, buffer, BUFFER_SIZE);
     if (i == 0)
-    {
-        free(buffer);
-        return (NULL);
-    }
+        return (0);
     buffer[i] = '\0';
-    return (buffer);
+    temp = *cache;
+    *cache = ft_strjoin(*cache, buffer);
+    free(temp);
+    return (1);
 }
 
-static char *gnl_make_line(const char *cache)
+static char *gnl_make_line(char *cache)
 {
-    size_t i;
     char *line;
-
+    size_t i;
+    
     i = 0;
     while (cache[i] != '\n')
         i++;
@@ -104,7 +90,20 @@ static char *gnl_make_line(const char *cache)
         line[i] = cache[i];
         i++;
     }
-    line[i] = cache[i];
+    line[i] = '\n';
     line[++i] = '\0';
     return (line);
+}
+
+static void gnl_update_cache(char **cache, char *line)
+{
+    char *temp;
+    size_t cache_len;
+    size_t line_len;
+
+    temp = *cache;
+    cache_len = ft_strlen(*cache);
+    line_len = ft_strlen(line);
+    *cache = ft_substr(*cache, line_len, cache_len - line_len);
+    free(temp);   
 }
