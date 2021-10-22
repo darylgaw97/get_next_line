@@ -6,7 +6,7 @@
 /*   By: dgaw <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 21:52:16 by dgaw              #+#    #+#             */
-/*   Updated: 2021/10/14 21:52:20 by dgaw             ###   ########.fr       */
+/*   Updated: 2021/10/22 11:55:36 by dgaw             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char *substr;
-	size_t slen;
-	size_t i;
+	char	*substr;
+	size_t	slen;
+	size_t	i;
 
 	if (!s || start >= ft_strlen(s))
 		return (ft_strdup(""));
