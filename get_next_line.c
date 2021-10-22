@@ -98,7 +98,7 @@ static char	*gnl_make_line(char **ptr_cache)
 	while (*ptr_cache[i] != '\n' && *ptr_cache[i] != '\0')
 	{
 		line[i] = *ptr_cache[i];
-		i++
+		i++;
 	}
 	if (*ptr_cache[i] == '\n')
 		line[i++] = '\n';
