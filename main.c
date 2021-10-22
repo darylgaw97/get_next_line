@@ -19,7 +19,8 @@ int main(void)
     int fd;
     char *line;
 
-    fd = open("empty.txt", O_RDONLY);
+    //fd = open("empty.txt", O_RDONLY);
+    fd = 5;
 
     line = get_next_line(fd);
     while (line)

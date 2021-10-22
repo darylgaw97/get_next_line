@@ -57,7 +57,7 @@ static int	gnl_load_cache(char **ptr_cache, int fd)
 {
 	char	*buffer;
 	char	*temp;
-	size_t	i;
+	int 	i;
 
 	buffer = malloc(sizeof(char) * (BUFFER_SIZE) + 1);
 	if (buffer == NULL)
@@ -65,7 +65,7 @@ static int	gnl_load_cache(char **ptr_cache, int fd)
 	if (*ptr_cache == NULL)
 		*ptr_cache = ft_strdup("");
 	i = read(fd, buffer, BUFFER_SIZE);
-	if (i == 0)
+	if (i <= 0)
 	{
 		free (buffer);
 		return (0);
