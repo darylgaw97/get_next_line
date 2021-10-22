@@ -28,7 +28,10 @@ char	*get_next_line(int fd)
 	{
 		if (!gnl_load_cache(&cache, fd))
 		{
-			line = gnl_make_line(&cache);
+		    if (cache == NULL)
+		        line = NULL;
+		    else
+			    line = gnl_make_line(&cache);
 			gnl_update_cache(&cache, line);
 			return (line);
 		}
@@ -80,8 +83,6 @@ static char	*gnl_make_line(char **ptr_cache)
 	char	*line;
 	size_t	i;
 
-	if (ptr_cache == NULL)
-		return (NULL);
 	if (*(*ptr_cache) == '\0')
 	{
 		free(*ptr_cache);
