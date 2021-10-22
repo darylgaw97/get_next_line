@@ -63,7 +63,10 @@ static int  gnl_load_cache(char **ptr_cache, int fd)
         *ptr_cache = ft_strdup("");
     i = read(fd, buffer, BUFFER_SIZE);
     if (i == 0)
+    {
+        free (buffer);
         return (0);
+    }
     buffer[i] = '\0';
     temp = *ptr_cache;
     *ptr_cache = ft_strjoin(*ptr_cache, buffer);
