@@ -22,7 +22,7 @@ char	*get_next_line(int fd)
 	static char	*cache;
 	char		*line;
 
-	if (fd < 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	while (!gnl_find_end(cache))
 	{

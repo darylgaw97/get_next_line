@@ -19,7 +19,7 @@ int main(void)
     int fd;
     char *line;
 
-    fd = open("marvel.txt", O_RDONLY);
+    fd = open("empty.txt", O_RDONLY);
 
     line = get_next_line(fd);
     while (line)
