@@ -30,7 +30,7 @@ char *get_next_line(int fd)
         {
             if (*cache)
             {
-                line = strdup(cache);
+                line = ft_strdup(cache);
                 free(cache);
                 return (line);
             }
@@ -79,7 +79,7 @@ static char *gnl_make_line(char *cache)
 {
     char *line;
     size_t i;
-    
+
     i = 0;
     while (cache[i] != '\n')
         i++;
@@ -105,5 +105,5 @@ static void gnl_update_cache(char **cache, char *line)
     cache_len = ft_strlen(*cache);
     line_len = ft_strlen(line);
     *cache = ft_substr(*cache, line_len, cache_len - line_len);
-    free(temp);   
+    free(temp);
 }
