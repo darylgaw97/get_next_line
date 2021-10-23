@@ -20,6 +20,8 @@
 #  define BUFFER_SIZE 42
 # endif
 
+# define MAX_FD 1024
+
 size_t	ft_strlen(const char *str);
 char	*ft_strdup(const char *s);
 char	*ft_strjoin(char const *s1, char const *s2);
