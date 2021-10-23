@@ -40,8 +40,13 @@ static void	gnl_update_cache(char **cache, char *line)
 	size_t	strlen_cache;
 	size_t	strlen_line;
 
-	if (*cache == NULL || **cache == '\0')
+	if (*cache == NULL)
 		return ;
+	if (**cache == '\0')
+	{
+		free(*cache);
+		return ;
+	}
 	temp = *cache;
 	strlen_cache = ft_strlen(*cache);
 	strlen_line = ft_strlen(line);
@@ -76,7 +81,10 @@ static int	gnl_load_cache(char **cache, int fd)
 		return (0);
 	bytes_read = read(fd, buffer, BUFFER_SIZE);
 	if (bytes_read <= 0)
+	{
+		free(buffer);
 		return (0);
+	}
 	buffer[bytes_read] = '\0';
 	if (*cache == NULL)
 		*cache = ft_strjoin(*cache, buffer);
