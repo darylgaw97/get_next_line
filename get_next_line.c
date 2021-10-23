@@ -60,7 +60,7 @@ static char	*gnl_make_line(char *cache)
 	end = gnl_find_end(cache);
 	if (end >= 0)
 		line = ft_substr(cache, 0, end + 1);
-	else if (end == -1)
+	else
 		line = ft_strdup(cache);
 	return (line);
 }
