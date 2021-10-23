@@ -45,6 +45,7 @@ static void	gnl_update_cache(char **cache, char *line)
 	if (**cache == '\0')
 	{
 		free(*cache);
+		*cache = NULL;
 		return ;
 	}
 	temp = *cache;
