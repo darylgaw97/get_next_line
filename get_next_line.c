@@ -69,7 +69,7 @@ static char	*gnl_make_line(char *cache)
 	end = gnl_find_end(cache);
 	if (end <= 0)
 		line = ft_strdup(cache);
-	else if (end > 0)
+	else
 		line = ft_substr(cache, 0, end + 1);
 	return (line);
 }
