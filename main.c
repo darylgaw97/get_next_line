@@ -19,19 +19,14 @@ int main(void)
     int fd;
     char *line;
 
-    open("oneline.txt", O_RDONLY);
-    //open("marvel.txt", O_RDONLY);
+    fd = open("oneline.txt", O_RDONLY);
+    fd = open("marvel.txt", O_RDONLY);
 
-    for(int i = 3; i < 7; i++)
-    {
-        fd = i % 3 + 3;
-        printf("fd: %i\n", fd);
-        line = get_next_line(fd);
-        while (line)
-        {
-            printf("%s", line);
-            free (line);
-            line = get_next_line(fd);
-        }
-    }
+   line = get_next_line(fd);
+   while (line)
+   {
+       printf("%s\n", line);
+       free(line);
+       line = get_next_line(fd);
+   }
 }
