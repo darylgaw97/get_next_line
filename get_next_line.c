@@ -47,12 +47,6 @@ static void	gnl_update_cache(char **cache, char *line)
 
 	if (*cache == NULL)
 		return ;
-	if (**cache == '\0')
-	{
-		free(*cache);
-		*cache = NULL;
-		return ;
-	}
 	temp = *cache;
 	strlen_cache = ft_strlen(*cache);
 	strlen_line = ft_strlen(line);
