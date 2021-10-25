@@ -31,6 +31,11 @@ char *get_next_line(int fd)
 	}
 	line = gnl_make_line(cache[fd]);
 	gnl_update_cache(&cache[fd], line);
+	if (*cache[fd] == '\0')
+	{
+		free(cache[fd]);
+		cache[fd] = NULL;
+	}
 	return (line);
 }
 
