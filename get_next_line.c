@@ -31,6 +31,11 @@ char	*get_next_line(int fd)
 	}
 	line = gnl_make_line(cache[fd]);
 	gnl_update_cache(&cache[fd], line);
+	if (*cache[fd] == '\0' && gnl_buffer(&cache[fd], fd) <= 0)
+	{
+			free(cache[fd]);
+			cache[fd] = NULL;
+	}
 	return (line);
 }
 
@@ -100,7 +105,7 @@ static int	gnl_find_end(char *cache)
 	while (cache[i])
 	{
 		if (cache[i] == '\n')
-			return (i + 1);
+			return (i);
 		i++;
 	}
 	return (-1);
