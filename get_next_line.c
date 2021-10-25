@@ -60,7 +60,7 @@ static char	*gnl_make_line(char *cache)
 	if (end <= 0)
 		line = ft_strdup(cache);
 	else
-		line = ft_substr(cache, 0, end);
+		line = ft_substr(cache, 0, end + 1);
 	return (line);
 }
 
@@ -95,7 +95,7 @@ static int	gnl_find_end(char *cache)
 	int	i;
 
 	if (cache == NULL)
-		return (0);
+		return (-1);
 	i = 0;
 	while (cache[i])
 	{
@@ -103,5 +103,5 @@ static int	gnl_find_end(char *cache)
 			return (i + 1);
 		i++;
 	}
-	return (0);
+	return (-1);
 }
