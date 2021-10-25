@@ -24,7 +24,7 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	while (!gnl_find_end(cache[fd]))
+	while (gnl_find_end(cache[fd]) <= 0)
 	{
 		if (gnl_buffer(&cache[fd], fd) <= 0)
 			break ;
