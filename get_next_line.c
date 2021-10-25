@@ -100,7 +100,7 @@ static int	gnl_find_end(char *cache)
 	while (cache[i])
 	{
 		if (cache[i] == '\n')
-			return (i);
+			return (i + 1);
 		i++;
 	}
 	return (0);
