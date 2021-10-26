@@ -18,7 +18,7 @@ int main(int argc, char **argv)
 {
     char *line;
     int fd;
-    if (argc != 2 && argc != 3)
+    if (argc != 2 && argc != 3 && argc != 4)
         return (1);
 
 
@@ -41,8 +41,10 @@ int main(int argc, char **argv)
     //{
     if (argc == 2)
         fd = atoi(argv[1]);
-    else
+    else if (argc == 3)
         fd = atoi(argv[2]);
+    else if (argc == 4)
+        fd = atoi(argv[3]);
     line = get_next_line(fd);
     while (line)
     {

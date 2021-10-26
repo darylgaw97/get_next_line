@@ -35,17 +35,13 @@ char	*get_next_line(int fd)
 }
 
 static void	gnl_update_cache(char **cache, char *line, int fd)
-{	
+{
 	char	*temp;
 	size_t	strlen_cache;
 	size_t	strlen_line;
 
-	if (line == NULL)
-	{
-		free(*cache);
-		*cache = NULL;
+	if (*cache == NULL)
 		return ;
-	}
 	strlen_cache = ft_strlen(*cache);
 	strlen_line = ft_strlen(line);
 	temp = *cache;
@@ -53,7 +49,7 @@ static void	gnl_update_cache(char **cache, char *line, int fd)
 	if (**cache == '\0' && gnl_buffer(cache, fd) <= 0)
 	{
 		free(*cache);
-		cache = NULL;
+		*cache = NULL;
 	}
 	free(temp);
 }
