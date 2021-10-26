@@ -65,7 +65,7 @@ static char	*gnl_make_line(char *cache)
 	if (end <= 0)
 		line = ft_strdup(cache);
 	else
-		line = ft_substr(cache, 0, end + 1);
+		line = ft_substr(cache, 0, end);
 	return (line);
 }
 
