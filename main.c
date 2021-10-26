@@ -34,14 +34,15 @@ int main(void)
     fd = open("gnlTester/files/multiple_nlx5", O_RDONLY);
     fd = open("gnlTester/files/nl", O_RDONLY);
 
-    for (fd = 3; fd < 17; fd++)
+    //for (fd = 3; fd < 17; fd++)
+    //{
+    fd = 4;
+    line = get_next_line(fd);
+    while (line)
     {
+        printf("%s", line);
+        free(line);
         line = get_next_line(fd);
-        while (line)
-        {
-            printf("%s", line);
-            free(line);
-            line = get_next_line(fd);
-        }
     }
+    //}
 }

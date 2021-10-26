@@ -44,7 +44,7 @@ char	*get_next_line(int fd)
 }
 
 static void	gnl_update_cache(char **cache, char *line)
-{	
+{
 	char	*temp;
 	size_t	strlen_cache;
 	size_t	strlen_line;
