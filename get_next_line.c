@@ -28,14 +28,10 @@ char	*get_next_line(int fd)
 	{
 		if (gnl_buffer(&cache[fd], fd) <= 0)
 		{
-			if (cache[fd])
-			{
-				line = ft_strdup(cache[fd]);
-				free(cache[fd]);
-				cache[fd] = NULL;
-			}
-			else if (cache[fd] == NULL)
-				return (NULL);
+			line = ft_strdup(cache[fd]);
+			free(cache[fd]);
+			cache[fd] = NULL;
+			return (line);
 		}
 	}
 	line = gnl_make_line(cache[fd]);

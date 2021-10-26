@@ -14,10 +14,13 @@
 #include <fcntl.h>
 #include "get_next_line.h"
 
-int main(void)
+int main(int argc, char **argv)
 {
     char *line;
     int fd;
+    if (argc != 2 && argc != 3)
+        return (1);
+
 
     fd = open("gnlTester/files/41_no_nl", O_RDONLY);
     fd = open("gnlTester/files/41_with_nl", O_RDONLY);
@@ -36,7 +39,10 @@ int main(void)
 
     //for (fd = 3; fd < 17; fd++)
     //{
-    fd = 4;
+    if (argc == 2)
+        fd = atoi(argv[1]);
+    else
+        fd = atoi(argv[2]);
     line = get_next_line(fd);
     while (line)
     {
