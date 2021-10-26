@@ -15,7 +15,7 @@
 static int	gnl_find_end(char *cache);
 static int	gnl_buffer(char **cache, int fd);
 static char	*gnl_make_line(char *cache);
-static void	gnl_update_cache(char **cache, char *line, int fd);
+static void	gnl_update_cache(char **cache, char *line);
 
 char	*get_next_line(int fd)
 {
@@ -30,11 +30,11 @@ char	*get_next_line(int fd)
 			break ;
 	}
 	line = gnl_make_line(cache[fd]);
-	gnl_update_cache(&cache[fd], line, fd);
+	gnl_update_cache(&cache[fd], line);
 	return (line);
 }
 
-static void	gnl_update_cache(char **cache, char *line, int fd)
+static void	gnl_update_cache(char **cache, char *line)
 {
 	char	*temp;
 	size_t	strlen_cache;
@@ -46,12 +46,12 @@ static void	gnl_update_cache(char **cache, char *line, int fd)
 	strlen_line = ft_strlen(line);
 	temp = *cache;
 	*cache = ft_substr(*cache, strlen_line, strlen_cache - strlen_line);
-	if (**cache == '\0' && gnl_buffer(cache, fd) <= 0)
+	free(temp);
+	if (**cache == '\0')
 	{
 		free(*cache);
 		*cache = NULL;
 	}
-	free(temp);
 }
 
 static char	*gnl_make_line(char *cache)
@@ -59,7 +59,7 @@ static char	*gnl_make_line(char *cache)
 	char	*line;
 	int		end;
 
-	if (cache == NULL || *cache == '\0')
+	if (cache == NULL)
 		return (NULL);
 	end = gnl_find_end(cache);
 	if (end <= 0)
